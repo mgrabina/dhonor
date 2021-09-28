@@ -34,9 +34,9 @@ module.exports = {
    *
    * $ truffle test --network <network-name>
    */
-
+  contracts_directory: "./src/abis",
   networks: {
-        ropsten: {
+        /* ropsten: {
           provider: function() {
             HDWalletProvider = require("truffle-hdwallet-provider");
             mnemonic = "lol wtf no";
@@ -45,7 +45,7 @@ module.exports = {
           network_id: '3',
          // gas: 5000000
          gas: 4700000
-        },
+        },*/
         development: {
           host: "127.0.0.1",
           port: 7545,

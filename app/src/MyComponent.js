@@ -1,6 +1,6 @@
 import React from "react";
 import { newContextComponents } from "@drizzle/react-components";
-import logo from "./logo.png";
+import background from "./assets/background.jpg";
 
 const { AccountData, ContractData, ContractForm } = newContextComponents;
 
@@ -9,10 +9,10 @@ export default ({ drizzle, drizzleState }) => {
   return (
     <div className="App">
       <div>
-        <img src={logo} alt="drizzle-logo" />
-        <h1>Drizzle Examples</h1>
+        {/* <img src={logo} alt="drizzle-logo" /> */}
+        <h1>Dhonor</h1>
         <p>
-          Examples of how to get started with Drizzle in various situations.
+          Making a better world
         </p>
       </div>
 
@@ -28,6 +28,40 @@ export default ({ drizzle, drizzleState }) => {
       </div>
 
       <div className="section">
+        <h2>Dhonor</h2>
+        <p>
+          Donations DApp
+        </p>
+        <p>
+          <strong>Manager: </strong>
+          <ContractData
+            drizzle={drizzle}
+            drizzleState={drizzleState}
+            contract="Dhonor"
+            method="manager"
+          />
+        </p>
+        <p>
+          <strong>Campaigns: </strong>
+          <ContractData
+            drizzle={drizzle}
+            drizzleState={drizzleState}
+            contract="Dhonor"
+            method="campaigns"
+            methodArgs={[1]}
+          />
+        </p>
+        <ContractForm
+          drizzle={drizzle}
+          contract="Dhonor"
+          method="createCampaign"
+          sendArgs={{gasPrice: 10000000, gas: 100000}}
+        />
+        {/* <ContractForm drizzle={drizzle} contract="Dhonor" method="set" /> */}
+      </div>
+
+
+      {/* <div className="section">
         <h2>SimpleStorage</h2>
         <p>
           This shows a simple ContractData component with no arguments, along
@@ -123,7 +157,7 @@ export default ({ drizzle, drizzleState }) => {
           contract="ComplexStorage"
           method="singleDD"
         />
-      </div>
+      </div> */}
     </div>
   );
 };
