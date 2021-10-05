@@ -1,38 +1,51 @@
 import React from "react";
 import { newContextComponents } from "@drizzle/react-components";
+
 import background from "./assets/background.jpg";
+import { ThemeProvider, Div, Text } from  "atomize"
 
 const { AccountData, ContractData, ContractForm } = newContextComponents;
+
+
+const theme = {
+  colors: {
+      primary: "purple",
+      accent: 'pink'
+  }
+}
 
 export default ({ drizzle, drizzleState }) => {
   // destructure drizzle and drizzleState from props
   return (
-    <div className="App">
-      <div>
+    <ThemeProvider theme={theme}>
+      <Div className="App" >
+      <Div bg="gray200" m="20">
         {/* <img src={logo} alt="drizzle-logo" /> */}
-        <h1>Dhonor</h1>
-        <p>
+        <Text tag="h1">Dhonor</Text>
+        <Text tag="p">
           Making a better world
-        </p>
-      </div>
+        </Text>
+      </Div>
 
-      <div className="section">
-        <h2>Active Account</h2>
-        <AccountData
-          drizzle={drizzle}
-          drizzleState={drizzleState}
-          accountIndex={0}
-          units="ether"
-          precision={3}
-        />
-      </div>
+      <Div className="section">
+        <Text textColor="primary" tag="h2">Active Account</Text>
+        <Text textColor="accent">
+          <AccountData
+            drizzle={drizzle}
+            drizzleState={drizzleState}
+            accountIndex={0}
+            units="ether"
+            precision={3}
+          />
+        </Text>
+      </Div>
 
-      <div className="section">
-        <h2>Dhonor</h2>
-        <p>
+      <Div className="section">
+        <Text tag="h2">Dhonor</Text>
+        <Text tag="p">
           Donations DApp
-        </p>
-        <p>
+        </Text>
+        <Text tag="p">
           <strong>Manager: </strong>
           <ContractData
             drizzle={drizzle}
@@ -40,8 +53,8 @@ export default ({ drizzle, drizzleState }) => {
             contract="Dhonor"
             method="manager"
           />
-        </p>
-        <p>
+        </Text>
+        <Text tag="p">
           <strong>Campaigns: </strong>
           <ContractData
             drizzle={drizzle}
@@ -50,7 +63,7 @@ export default ({ drizzle, drizzleState }) => {
             method="campaigns"
             methodArgs={[1]}
           />
-        </p>
+        </Text>
         <ContractForm
           drizzle={drizzle}
           contract="Dhonor"
@@ -58,16 +71,16 @@ export default ({ drizzle, drizzleState }) => {
           sendArgs={{gasPrice: 10000000, gas: 100000}}
         />
         {/* <ContractForm drizzle={drizzle} contract="Dhonor" method="set" /> */}
-      </div>
+      </Div>
 
 
-      {/* <div className="section">
-        <h2>SimpleStorage</h2>
-        <p>
+      {/* <Div className="section">
+        <Text tag="h2">SimpleStorage</Text>
+        <Text tag="p">
           This shows a simple ContractData component with no arguments, along
           with a form to set its value.
-        </p>
-        <p>
+        </Text>
+        <Text tag="p">
           <strong>Stored Value: </strong>
           <ContractData
             drizzle={drizzle}
@@ -75,19 +88,19 @@ export default ({ drizzle, drizzleState }) => {
             contract="SimpleStorage"
             method="storedData"
           />
-        </p>
+        </Text>
         <ContractForm drizzle={drizzle} contract="SimpleStorage" method="set" />
-      </div>
+      </Div>
 
-      <div className="section">
-        <h2>TutorialToken</h2>
-        <p>
+      <Div className="section">
+        <Text tag="h2">TutorialToken</Text>
+        <Text tag="p">
           Here we have a form with custom, friendly labels. Also note the token
           symbol will not display a loading indicator. We've suppressed it with
           the <code>hideIndicator</code> prop because we know this variable is
           constant.
-        </p>
-        <p>
+        </Text>
+        <Text tag="p">
           <strong>Total Supply: </strong>
           <ContractData
             drizzle={drizzle}
@@ -103,8 +116,8 @@ export default ({ drizzle, drizzleState }) => {
             method="symbol"
             hideIndicator
           />
-        </p>
-        <p>
+        </Text>
+        <Text tag="p">
           <strong>My Balance: </strong>
           <ContractData
             drizzle={drizzle}
@@ -113,7 +126,7 @@ export default ({ drizzle, drizzleState }) => {
             method="balanceOf"
             methodArgs={[drizzleState.accounts[0]]}
           />
-        </p>
+        </Text>
         <h3>Send Tokens</h3>
         <ContractForm
           drizzle={drizzle}
@@ -121,16 +134,16 @@ export default ({ drizzle, drizzleState }) => {
           method="transfer"
           labels={["To Address", "Amount to Send"]}
         />
-      </div>
+      </Div>
 
-      <div className="section">
-        <h2>ComplexStorage</h2>
-        <p>
+      <Div className="section">
+        <Text tag="h2">ComplexStorage</Text>
+        <Text tag="p">
           Finally this contract shows data types with additional considerations.
           Note in the code the strings below are converted from bytes to UTF-8
           strings and the device data struct is iterated as a list.
-        </p>
-        <p>
+        </Text>
+        <Text tag="p">
           <strong>String 1: </strong>
           <ContractData
             drizzle={drizzle}
@@ -139,8 +152,8 @@ export default ({ drizzle, drizzleState }) => {
             method="string1"
             toUtf8
           />
-        </p>
-        <p>
+        </Text>
+        <Text tag="p">
           <strong>String 2: </strong>
           <ContractData
             drizzle={drizzle}
@@ -149,7 +162,7 @@ export default ({ drizzle, drizzleState }) => {
             method="string2"
             toUtf8
           />
-        </p>
+        </Text>
         <strong>Single Device Data: </strong>
         <ContractData
           drizzle={drizzle}
@@ -157,7 +170,8 @@ export default ({ drizzle, drizzleState }) => {
           contract="ComplexStorage"
           method="singleDD"
         />
-      </div> */}
-    </div>
+      </Div> */}
+    </Div>
+    </ThemeProvider>
   );
 };
